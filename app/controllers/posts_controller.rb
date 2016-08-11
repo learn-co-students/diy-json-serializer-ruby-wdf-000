@@ -6,10 +6,12 @@ class PostsController < ApplicationController
   end
 
   def show
+
   end
 
   def new
     @post = Post.new
+    @submit_action = "Submit Post"
   end
 
   def create
@@ -19,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @submit_action = "Update Post"
   end
 
   def update
@@ -29,6 +32,11 @@ class PostsController < ApplicationController
   def post_data
     post = Post.find(params[:id])
     render plain: post.description
+  end
+
+  def body
+    post = Post.find(params[:id])
+    render json: PostSerializer.serialize(post)
   end
 
 private
