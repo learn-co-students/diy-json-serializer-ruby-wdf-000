@@ -9,8 +9,7 @@ $(function () {
     // change the URL to the new route
     $.get("/posts/" + id + "/post_data", function(data) {
       // Replace text of body-id div
-      var tmp = data
-      console.log(data)
+      var tmp = JSON.parse(data)
       $("#body-" + id).html(tmp["description"]);
     });
   });
