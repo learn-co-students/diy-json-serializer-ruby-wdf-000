@@ -1,3 +1,11 @@
+
+  <% if @post.id %>
+    <% @result = "Update Post" %>
+  <%else%>
+    <% @result = "Submit Post" %>
+  <%end%>
+
+
 <%= form_for(@post) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
@@ -11,17 +19,19 @@
     </div>
   <% end %>
 
+
+
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :id => "title"%>
   </div>
 
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, :id => "description" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit @result %>
   </div>
 <% end %>
