@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
 
+  def body
+    post = Post.find(params[:id])
+    render json: PostSerializer.serialize(post)
+  end
   def index
     @posts = Post.all
   end
@@ -28,7 +32,12 @@ class PostsController < ApplicationController
 
   def post_data
     post = Post.find(params[:id])
-    render plain: post.description
+    # render plain: PostSerializer.serialize(post)
+    # render json: post.to_json
+    respond_to do |format|
+      format.json  { render :json => {:post =>post,
+                                          :author => post.author }}
+end
   end
 
 private
