@@ -6,10 +6,13 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find_by(id: params[:id])
+    # binding.pry
   end
 
   def new
     @post = Post.new
+    @submit = 'Submit Post'
   end
 
   def create
@@ -19,6 +22,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find_by(id: params[:id])
+    @submit = 'Update Post'
   end
 
   def update
@@ -28,8 +33,15 @@ class PostsController < ApplicationController
 
   def post_data
     post = Post.find(params[:id])
-    render plain: post.description
+    render plain: PostSerializer.serialize(post)
   end
+
+  # posts_controller.rb
+# ...
+  # def body
+  #   post = Post.find(params[:id])
+  #   render json: PostSerializer.serialize(post)
+  # end
 
 private
   # Use callbacks to share common setup or constraints between actions.
