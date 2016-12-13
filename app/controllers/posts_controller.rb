@@ -1,6 +1,13 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
 
+
+  def post_data
+    post = Post.find(params[:id])
+    render json: PostSerializer.serialize(post)
+  end
+
+
   def index
     @posts = Post.all
   end
@@ -10,6 +17,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @action = "Submit"
+
   end
 
   def create
@@ -19,6 +28,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @action = "Update"
   end
 
   def update
