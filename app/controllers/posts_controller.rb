@@ -6,10 +6,12 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = set_post
   end
 
   def new
     @post = Post.new
+    @action = "Submit"
   end
 
   def create
@@ -19,6 +21,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @action = "Update"
   end
 
   def update
