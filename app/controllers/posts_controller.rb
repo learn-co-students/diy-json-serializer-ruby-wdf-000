@@ -6,10 +6,12 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def new
     @post = Post.new
+    @submit_text = "Submit Post"
   end
 
   def create
@@ -19,6 +21,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @submit_text = "Update Post"
   end
 
   def update
@@ -31,6 +35,11 @@ class PostsController < ApplicationController
     render plain: post.description
   end
 
+  def post_data
+    post = Post.find(params[:id])
+    render json: PostSerializer.serialize(post)
+  end
+  
 private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
